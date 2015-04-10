@@ -1,16 +1,85 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app>
 <head>
+ 	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
 	<meta charset="UTF-8">
 	<title>Document</title>
+
 	<link rel="stylesheet" href="libs/css/uikit.min.css">
 
-	<script type="text/javascript" src="libs/js/uikit.js"></script>
+	<!--<script type="text/javascript" src="libs/js/uikit.js"></script> -->
 </head>
 <body>
-	<div class="uk-grid">
-		<div class="uk-width-1-1">vermelho</div>
-		
-	</div>
+	
+	<h2 class="uk-text-center uk-panel-box-primary">CADASTRO DE FUNCIONÁRIOS</h2>
+
+	<form class="uk-panel uk-panel-box-primary">
+		<fieldset data-uk-margin>
+			
+		    <div class="uk-form-row ">
+		   		<h3 class="uk-text-left "><i class="uk-icon-user"></i>Informe abaixo os dados do funcionário:</h3>	
+            </div>
+
+
+			<div class="uk-form-row" >
+				
+				<h4  class="uk-text-left"><i class="uk-icon-group"></i>Lista todos os funcionários</h4>
+            </div>
+
+            <div ng-controller="CtrlLista">
+
+				<div class="uk-form-row">
+					<input type="text" ng-model="vNome"   placeholder="Nome"/> 
+				</div>
+				<div class="uk-form-row">
+					<input type="text" ng-model="vSobreNome"   placeholder="SobreNome"/> 
+				</div>
+				<div class="uk-form-row">
+					<select>
+						<option value="feminino">FEMININO</option>
+						<option value="masculino">MASCULINO</option>
+					</select>
+        		</div>
+				<div class="uk-form-row">
+					<!-- <button ng-click="adicionar()" class="uk-button-primary">Salvar 
+					 </button> -->
+					<button ng-click="adicionar()" class="uk-button-primary" >Salvar 	 </button> 
+				</div>
+
+				<ul>
+					<li ng-repeat="pessoa in pessoas">
+						{{pessoa.nome}},{{pessoa.sobrenome}}
+					</li>
+					
+				</ul>
+
+			</div>	
+
+           
+		</fieldset>
+	</form>	
+
+<script> 
+	var CtrlLista = function($scope) {
+
+		$scope.pessoas = [
+			{nome: "Maria", SobreNome: "Silva"},
+			{nome: "João", SobreNome: "Santos"}
+		];
+
+		$scope.adicionar = function() {
+			$scope.pessoas.push({
+				nome: $scope.vNome,
+				SobreNome: $scope.vSobreNome
+			});
+			  $scope.vNome = "";
+			  $scope.vSobreNome = "";
+		};
+	
+	};
+
+</script>
+
+
 </body>
 </html>
